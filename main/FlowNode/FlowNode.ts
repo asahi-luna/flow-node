@@ -7,9 +7,16 @@ export interface InflowPonit<T> {
 export default class FlowNode {
   constructor() { };
 
+  static async getStateVal<T>(flow: rx.BehaviorSubject<T>): Promise<T> {
+    return await new Promise((resolve) => {
+      const flowsc = flow.subscribe(val => resolve(val));
+      flowsc.unsubscribe();
+    });
+  }
+
   static send<T>(outflow: rx.Subject<T>, inflow: rx.Subject<T>) {
     outflow.subscribe(data => {
-      inflow.next(data)
+      inflow.next(data);
     });
   }
 
