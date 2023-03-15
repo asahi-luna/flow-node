@@ -1,0 +1,6 @@
+# dist
+dist/
+
+# Node.js Tools for Visual Studio
+node_modules/
+
